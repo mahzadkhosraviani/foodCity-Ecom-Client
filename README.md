@@ -35,6 +35,8 @@ cd food-ecom
 
 npm install
 
+cd next-ecom
+
 npm run dev
 ```
 
