@@ -16,7 +16,7 @@ A modern responsive e-commerce frontend application built with Next.js, TypeScri
 
 ## Tech Stack
 
-- Next.js 15
+- Next.js
 - React
 - TypeScript
 
