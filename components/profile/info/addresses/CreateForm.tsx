@@ -1,4 +1,14 @@
-export default function CreateForm() {
+"use client";
+
+import { useState } from "react";
+
+export default function CreateForm({ data }) {
+  const [citiesFilter, setCitiesFilter] = useState(data.cities);
+  function changeProvince(e) {
+    setCitiesFilter(
+      data.cities.filter((city) => city.province_id == e.target.value),
+    );
+  }
   return (
     <>
       {" "}
@@ -27,20 +37,22 @@ export default function CreateForm() {
             </div>
             <div className="col col-md-6">
               <label className="form-label">استان</label>
-              <select className="form-select">
-                <option selected>تهران</option>
-                <option value="1">اصفهان</option>
-                <option value="2">فارس</option>
-                <option value="3">یزد</option>
+              <select className="form-select" onChange={changeProvince}>
+                {data.provinces.map((province) => (
+                  <option key={province.id} value={province.id}>
+                    {province.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col col-md-6">
               <label className="form-label">شهر</label>
               <select className="form-select">
-                <option selected>تهران</option>
-                <option value="1">اصفهان</option>
-                <option value="2">شیراز</option>
-                <option value="3">یزد</option>
+                {citiesFilter.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col col-md-12">
