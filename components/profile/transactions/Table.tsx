@@ -11,7 +11,7 @@ export default async function Table({ params }) {
   const data = await GetFetch(`/profile/transactions?${params}`, {
     Authorization: `Bearer ${token?.value}`,
   });
-  console.log(data);
+
   return (
     <>
       {" "}

@@ -2,7 +2,7 @@
 
 import { PostFetch } from "@/app/utils/fetch";
 import { handleError } from "@/app/utils/helper";
-import { error } from "console";
+
 import { cookies } from "next/headers";
 
 async function login(stateLogin, formData) {
@@ -151,4 +151,25 @@ async function resendOtp(stateResendOtp, formData) {
     };
   }
 }
-export { login, CheckOtp, me, resendOtp };
+async function logout(state, formData) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+
+  const data = await PostFetch(
+    "/auth/logout",
+    {},
+    { Authorization: `Bearer ${token?.value}` },
+  );
+
+  if (data.status === "success") {
+    cookieStore.delete("access_token");
+    return {
+      success: "you are logged out",
+    };
+  } else {
+    return {
+      error: "user forbbiden",
+    };
+  }
+}
+export { login, CheckOtp, me, resendOtp, logout };
