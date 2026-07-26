@@ -1,6 +1,7 @@
 "use server";
 import { PostFetch } from "@/app/utils/fetch";
 import { handleError } from "@/app/utils/helper";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 async function editInfo(state, formData) {
@@ -95,8 +96,9 @@ async function createAddress(state, formData) {
     },
     { Authorization: `Bearer ${token?.value}` },
   );
-  console.log(data);
+
   if (data.status === "success") {
+    revalidatePath("profile/addresses");
     return {
       status: data.status,
       message: "ثبت آدرس با موفقیت انجام شد.",
@@ -118,7 +120,7 @@ async function editAddress(state, formData) {
   const address = formData.get("address");
   const address_id = formData.get("address_id");
 
-  if (address_id === null || address_id ==="") {
+  if (address_id === null || address_id === "") {
     return {
       status: "error",
       message: "شناسه آدرس الزامی است.",
@@ -163,12 +165,13 @@ async function editAddress(state, formData) {
       province_id,
       city_id,
       address,
-      address_id 
+      address_id,
     },
     { Authorization: `Bearer ${token?.value}` },
   );
-  console.log(data);
+
   if (data.status === "success") {
+    revalidatePath("profile/addresses");
     return {
       status: data.status,
       message: "ویرایش با موفقیت انجام شد.",
@@ -181,4 +184,39 @@ async function editAddress(state, formData) {
     };
   }
 }
-export { editInfo, createAddress, editAddress };
+async function deleteAddress(state, formData) {
+  const address_id = formData.get("address_id");
+
+  if (address_id === null || address_id === "") {
+    return {
+      status: "error",
+      message: "شناسه آدرس الزامی است.",
+    };
+  }
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+
+  const data = await PostFetch(
+    "/profile/addresses/delete",
+    {
+      address_id,
+    },
+    { Authorization: `Bearer ${token?.value}` },
+  );
+
+  if (data.status === "success") {
+    revalidatePath("profile/addresses");
+    return {
+      status: data.status,
+      message: "حذف آدرس با موفقیت انجام شد.",
+      user: data.data,
+    };
+  } else {
+    return {
+      status: data.status,
+      message: handleError(data.message),
+    };
+  }
+}
+export { editInfo, createAddress, editAddress, deleteAddress };

@@ -4,6 +4,7 @@ import { editAddress } from "@/actions/profile";
 import SubmitButton from "@/components/SubmitButton";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import DeleteForm from "./DeleteForm";
 
 export default function EditForm({ data, address }) {
   const [citiesFilter, setCitiesFilter] = useState(data.cities);
@@ -99,9 +100,7 @@ export default function EditForm({ data, address }) {
             <SubmitButton title="ویرایش" style="btn btn-primary mt-4" />
           </div>
         </form>
-        <div className="form-delete-address">
-          <button className="btn btn-dark">حذف </button>
-        </div>
+        <DeleteForm addressId={address.id}  />
       </div>
     </>
   );
