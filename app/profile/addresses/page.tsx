@@ -1,6 +1,6 @@
 import { GetFetch } from "@/app/utils/fetch";
-import CreateForm from "@/components/profile/info/addresses/CreateForm";
-import EditForm from "@/components/profile/info/addresses/EditForm";
+import CreateForm from "@/components/profile/addresses/CreateForm";
+import EditForm from "@/components/profile/addresses/EditForm";
 import { cookies } from "next/headers";
 
 export default async function AddressesPage() {
