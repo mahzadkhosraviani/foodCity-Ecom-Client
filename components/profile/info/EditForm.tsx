@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 
 import { editInfo } from "@/actions/profile";
 import SubmitButton from "@/components/SubmitButton";
