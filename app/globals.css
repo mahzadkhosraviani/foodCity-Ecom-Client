@@ -1312,3 +1312,8 @@ a:focus {
   bottom: 16px;
 margin-bottom: 44px;
 }
+.form-delete-address{
+  position: absolute;
+  left: 16px;
+  bottom: 18px;
+}
