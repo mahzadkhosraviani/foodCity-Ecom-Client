@@ -1,6 +1,14 @@
+"use client";
+
+import { logout } from "@/actions/auth";
+import Authcontext from "@/context/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 export default function Layout({ children }) {
+  const { logoutContext } = useContext(Authcontext);
+  const router = useRouter();
   return (
     <section className="profile_section layout_padding">
       <div className="container">
@@ -18,6 +26,17 @@ export default function Layout({ children }) {
               </li>
               <li className="list-group-item">
                 <Link href="/profile/transactions">تراکنش ها</Link>
+              </li>
+              <li className="list-group-item">
+                <button
+                  onClick={async () => {
+                    await logout();
+                    logoutContext();
+                    router.push("/");
+                  }}
+                >
+                  خروج
+                </button>
               </li>
             </ul>
           </div>

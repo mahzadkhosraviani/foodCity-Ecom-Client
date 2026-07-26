@@ -32,7 +32,7 @@ async function editInfo(state, formData) {
     },
     { Authorization: `Bearer ${token?.value}` },
   );
-  console.log(data);
+
   if (data.status === "success") {
     return {
       status: data.status,

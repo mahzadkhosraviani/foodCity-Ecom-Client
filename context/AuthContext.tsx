@@ -9,10 +9,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkUserLoggedIN = async () => {
       const data = await me();
-      if(data?.error){
-        setUser(null)
-      }else{
-        setUser(data.user)
+      if (data?.error) {
+        setUser(null);
+      } else {
+        setUser(data.user);
       }
     };
     checkUserLoggedIN();
@@ -20,8 +20,11 @@ export const AuthProvider = ({ children }) => {
   const loginContext = (user) => {
     return setUser(user);
   };
+  const logoutContext = () => {
+    return setUser(null);
+  };
   return (
-    <Authcontext.Provider value={{ user, loginContext }}>
+    <Authcontext.Provider value={{ user, loginContext, logoutContext }}>
       {children}
     </Authcontext.Provider>
   );
