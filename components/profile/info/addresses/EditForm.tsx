@@ -93,6 +93,7 @@ export default function EditForm({ data, address }) {
                 className="form-control"
               ></textarea>
             </div>
+            <input type="hidden" name="address_id" value={address.id} />
           </div>
           <div>
             <SubmitButton title="ویرایش" style="btn btn-primary mt-4" />
