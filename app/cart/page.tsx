@@ -7,11 +7,18 @@ import {
   decrement,
   increment,
   removeFromCart,
+  totalAmountCart,
 } from "@/redux/slices/cartSlice";
 import Link from "next/link";
+import Coupon from "@/components/cart/Coupon";
+import { useState } from "react";
+import Address from "@/components/cart/Address";
 
 export default function cartPage() {
+  const [coupon, setCoupon] = useState({ code: "", percent: 0 });
+  const [addressId, setAddressId] = useState("");
   const state = useSelector((state) => state.shoppingCart);
+  const totalAmount = useSelector(totalAmountCart);
   const dispatch = useDispatch();
   return (
     <>
@@ -123,32 +130,8 @@ export default function cartPage() {
                   </div>
                 </div>
                 <div className="row mt-4">
-                  <div className="col-12 col-md-6">
-                    <div className="input-group mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="کد تخفیف"
-                      />
-                      <button className="input-group-text" id="basic-addon2">
-                        اعمال کد تخفیف
-                      </button>
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-6 d-flex justify-content-end align-items-baseline">
-                    <div>انتخاب آدرس</div>
-                    <select
-                      style={{ width: "200px" }}
-                      className="form-select ms-3"
-                      aria-label="Default select example"
-                    >
-                      <option selected>منزل</option>
-                      <option value="1">محل کار</option>
-                    </select>
-                    <a href="profile.html" className="btn btn-primary">
-                      ایجاد آدرس
-                    </a>
-                  </div>
+                  <Coupon setCoupon={setCoupon} />
+                  <Address setAddressId={setAddressId}/>
                 </div>
                 <div className="row justify-content-center mt-5">
                   <div className="col-12 col-md-6">
@@ -158,18 +141,31 @@ export default function cartPage() {
                         <ul className="list-group mt-4">
                           <li className="list-group-item d-flex justify-content-between">
                             <div>مجموع قیمت :</div>
-                            <div>535,000 تومان</div>
+                            <div>{numberFormat(totalAmount)} تومان</div>
                           </li>
                           <li className="list-group-item d-flex justify-content-between">
                             <div>
                               تخفیف :
-                              <span className="text-danger ms-1">10%</span>
+                              <span className="text-danger ms-1">
+                                {coupon.percent}%
+                              </span>
                             </div>
-                            <div className="text-danger">53,500 تومان</div>
+                            <div className="text-danger">
+                              {numberFormat(
+                                (totalAmount * coupon.percent) / 100,
+                              )}{" "}
+                              تومان
+                            </div>
                           </li>
                           <li className="list-group-item d-flex justify-content-between">
                             <div>قیمت پرداختی :</div>
-                            <div>481,500 تومان</div>
+                            <div>
+                              {numberFormat(
+                                totalAmount -
+                                  (totalAmount * coupon.percent) / 100,
+                              )}{" "}
+                              تومان
+                            </div>
                           </li>
                         </ul>
                         <button className="user_option btn-auth mt-4">
