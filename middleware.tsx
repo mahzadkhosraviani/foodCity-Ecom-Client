@@ -8,4 +8,4 @@ export default async function middleware(req) {
   }
 }
 
-export const config = { matcher: ["/profile/:path*"] };
+export const config = { matcher: ["/profile/:path*","/cart"] };
