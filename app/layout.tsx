@@ -5,6 +5,7 @@ import BootstrapClient from "@/components/libraries/Bootstrap";
 import Footer from "@/components/layout/Footer";
 import Toastify from "@/components/libraries/Toastify";
 import { AuthProvider } from "@/context/AuthContext";
+import Providers from "@/redux/Provider";
 
 export default function RootLayout({
   children,
@@ -15,13 +16,15 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body>
         <AuthProvider>
-          <NextBprogress>
-            <Header />
-            {children}
-            <Footer />
-            <BootstrapClient />
-            <Toastify />
-          </NextBprogress>
+          <Providers>
+            <NextBprogress>
+              <Header />
+              {children}
+              <Footer />
+              <BootstrapClient />
+              <Toastify />
+            </NextBprogress>
+          </Providers>
         </AuthProvider>
       </body>
     </html>

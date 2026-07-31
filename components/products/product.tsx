@@ -1,8 +1,15 @@
+"use client";
 import { numberFormat } from "@/app/utils/helper";
+import { addToCart } from "@/redux/slices/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 export default function Product({ product }) {
+  const dispatch = useDispatch();
+  function handleAddToCart(product) {
+    dispatch(addToCart({product,qty:1}));
+  }
   return (
     <div className="box">
       <div>
@@ -24,18 +31,18 @@ export default function Product({ product }) {
             <h6>
               {product.sale_price ? (
                 <>
-                  {" "} <span>{numberFormat(product.sale_price)}</span>
+                  {" "}
+                  <span>{numberFormat(product.sale_price)}</span>
                   <del className="me-1">{numberFormat(product.price)}</del>
-                 
                 </>
               ) : (
                 <span>{numberFormat(product.price)}</span>
               )}
               <span>تومان</span>
             </h6>
-            <a >
+            <button onClick={() => handleAddToCart(product)}>
               <i className="bi bi-cart-fill text-white fs-5"></i>
-            </a>
+            </button>
           </div>
         </div>
       </div>
