@@ -1,8 +1,8 @@
 import { GetFetch } from "@/app/utils/fetch";
 import { numberFormat, salePercent } from "@/app/utils/helper";
 import Product from "@/components/products/product";
+import ShoppingCart from "@/components/products/shoppingCart";
 import Image from "next/image";
-
 
 export default async function productsPage({ params }) {
   const Params = await params;
@@ -37,15 +37,7 @@ export default async function productsPage({ params }) {
                     )}
                   </h6>
                   <p>{product.description}</p>
-
-                  <div className="mt-5 d-flex">
-                    <button className="btn-add">افزودن به سبد خرید</button>
-                    <div className="input-counter ms-4">
-                      <span className="plus-btn">+</span>
-                      <div className="input-number">1</div>
-                      <span className="minus-btn">-</span>
-                    </div>
-                  </div>
+                  <ShoppingCart product={product} />
                 </div>
                 <div className="col-sm-12 col-lg-6">
                   <div
