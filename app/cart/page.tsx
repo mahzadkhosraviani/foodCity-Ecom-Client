@@ -12,9 +12,11 @@ import {
 import Link from "next/link";
 import Coupon from "@/components/cart/Coupon";
 import { useState } from "react";
+import Address from "@/components/cart/Address";
 
 export default function cartPage() {
   const [coupon, setCoupon] = useState({ code: "", percent: 0 });
+  const [addressId, setAddressId] = useState("");
   const state = useSelector((state) => state.shoppingCart);
   const totalAmount = useSelector(totalAmountCart);
   const dispatch = useDispatch();
@@ -129,20 +131,7 @@ export default function cartPage() {
                 </div>
                 <div className="row mt-4">
                   <Coupon setCoupon={setCoupon} />
-                  <div className="col-12 col-md-6 d-flex justify-content-end align-items-baseline">
-                    <div>انتخاب آدرس</div>
-                    <select
-                      style={{ width: "200px" }}
-                      className="form-select ms-3"
-                      aria-label="Default select example"
-                    >
-                      <option selected>منزل</option>
-                      <option value="1">محل کار</option>
-                    </select>
-                    <a href="profile.html" className="btn btn-primary">
-                      ایجاد آدرس
-                    </a>
-                  </div>
+                  <Address setAddressId={setAddressId}/>
                 </div>
                 <div className="row justify-content-center mt-5">
                   <div className="col-12 col-md-6">

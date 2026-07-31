@@ -1,5 +1,5 @@
 "use server";
-import { PostFetch } from "@/app/utils/fetch";
+import { GetFetch, PostFetch } from "@/app/utils/fetch";
 import { handleError } from "@/app/utils/helper";
 
 import { cookies } from "next/headers";
@@ -30,7 +30,7 @@ async function checkCoupon(state, formData) {
       status: data.status,
       message: "کد تخفیف شما اعمال شد.",
       percentage: data.data.percentage,
-      code
+      code,
     };
   } else {
     return {
@@ -39,5 +39,12 @@ async function checkCoupon(state, formData) {
     };
   }
 }
-
-export { checkCoupon };
+async function getAddresses() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+  const data = await GetFetch("/user/addresses", {
+    Authorization: `Bearer ${token?.value}`,
+  });
+  return data;
+}
+export { checkCoupon,getAddresses };
