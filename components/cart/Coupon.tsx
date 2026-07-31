@@ -4,7 +4,8 @@ import { editInfo } from "@/actions/profile";
 import SubmitButton from "@/components/SubmitButton";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
-export default function Coupon() {
+export default function Coupon({setCoupon}) {
+  
   const [state, formAction] = useActionState(checkCoupon, {
     status: null,
     message: null,
@@ -13,6 +14,9 @@ export default function Coupon() {
   useEffect(() => {
     if (!state.message) return;
     toast(state.message, { type: `${state.status}` });
+    if(state.status=="success"){
+        setCoupon({code:state.code,percent:state.percentage})
+    }
   }, [state]);
   return (
     <form action={formAction} className="col-12 col-md-6">

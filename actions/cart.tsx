@@ -18,10 +18,9 @@ async function checkCoupon(state, formData) {
   const token = cookieStore.get("access_token");
 
   const data = await PostFetch(
-    "/profile/info/edit",
+    "/check-coupon",
     {
-      name,
-      email,
+      code,
     },
     { Authorization: `Bearer ${token?.value}` },
   );
@@ -29,8 +28,9 @@ async function checkCoupon(state, formData) {
   if (data.status === "success") {
     return {
       status: data.status,
-      message: "ویرایش اطلاعات با موفقیت انجام شد.",
-      user: data.data,
+      message: "کد تخفیف شما اعمال شد.",
+      percentage: data.data.percentage,
+      code
     };
   } else {
     return {

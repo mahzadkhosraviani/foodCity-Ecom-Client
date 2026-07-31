@@ -1,4 +1,5 @@
 "use client";
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -25,11 +26,18 @@ export const cartSlice = createSlice({
         p.id === action.payload ? { ...p, qty: p.qty - 1 } : p,
       );
     },
-    clearCart:(state)=>{
-      state.cart=[]
-    }
+    clearCart: (state) => {
+      state.cart = [];
+    },
   },
 });
-export const { addToCart, removeFromCart, increment, decrement,clearCart } =
+export const { addToCart, removeFromCart, increment, decrement, clearCart } =
   cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
+export const totalAmountCart = ({ shoppingCart }) => {
+  return shoppingCart.cart.reduce((total, product) => {
+    return product.sale_price 
+      ? total + product.sale_price * product.qty
+      : total + product.price * product.qty;
+  }, 0);
+};
