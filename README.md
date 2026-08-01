@@ -12,6 +12,7 @@ A modern responsive e-commerce frontend application built with Next.js, TypeScri
 - Responsive layout
 - Contact page
 - Profile page
+- admin panel
 - Dynamic product routes
 
 ## Tech Stack
