@@ -5,9 +5,12 @@ import Authcontext from "@/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@/redux/slices/cartSlice";
 
 export default function Layout({ children }) {
   const { logoutContext } = useContext(Authcontext);
+  const dispatch = useDispatch();
   const router = useRouter();
   return (
     <section className="profile_section layout_padding">
@@ -31,6 +34,8 @@ export default function Layout({ children }) {
                 <button
                   onClick={async () => {
                     await logout();
+                    dispatch(clearCart());
+                    localStorage.clear();
                     logoutContext();
                     router.push("/");
                   }}
