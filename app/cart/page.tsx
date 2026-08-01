@@ -13,6 +13,7 @@ import Link from "next/link";
 import Coupon from "@/components/cart/Coupon";
 import { useState } from "react";
 import Address from "@/components/cart/Address";
+import Payment from "@/components/cart/Payment";
 
 export default function cartPage() {
   const [coupon, setCoupon] = useState({ code: "", percent: 0 });
@@ -20,6 +21,7 @@ export default function cartPage() {
   const state = useSelector((state) => state.shoppingCart);
   const totalAmount = useSelector(totalAmountCart);
   const dispatch = useDispatch();
+
   return (
     <>
       {state.cart.length != 0 ? (
@@ -131,7 +133,7 @@ export default function cartPage() {
                 </div>
                 <div className="row mt-4">
                   <Coupon setCoupon={setCoupon} />
-                  <Address setAddressId={setAddressId}/>
+                  <Address setAddressId={setAddressId} />
                 </div>
                 <div className="row justify-content-center mt-5">
                   <div className="col-12 col-md-6">
@@ -168,9 +170,11 @@ export default function cartPage() {
                             </div>
                           </li>
                         </ul>
-                        <button className="user_option btn-auth mt-4">
-                          پرداخت
-                        </button>
+                        <Payment
+                          cart={state.cart}
+                          coupon={coupon}
+                          addressId={addressId}
+                        />
                       </div>
                     </div>
                   </div>

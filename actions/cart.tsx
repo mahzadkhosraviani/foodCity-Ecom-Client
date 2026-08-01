@@ -29,7 +29,7 @@ async function checkCoupon(state, formData) {
     return {
       status: data.status,
       message: "کد تخفیف شما اعمال شد.",
-      percentage: data.data.percentage,
+      percent: data.data.percentage,
       code,
     };
   } else {
@@ -47,4 +47,65 @@ async function getAddresses() {
   });
   return data;
 }
-export { checkCoupon,getAddresses };
+async function payment(state, formData) {
+  const cart = formData.get("cart");
+  const coupon = formData.get("coupon");
+  const address_id = formData.get("address_id");
+
+  if (address_id === "") {
+    return {
+      status: "error",
+      message: "انتخاب آدرس الزامی است.",
+    };
+  }
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+
+  const data = await PostFetch(
+    "/payment/send",
+    {
+      cart: JSON.parse(cart),
+      coupon: coupon,
+      address_id,
+    },
+    { Authorization: `Bearer ${token?.value}` },
+  );
+
+  if (data.status === "success") {
+    return {
+      status: data.status,
+      message: "در حال انتقال به درگاه پرداخت..",
+      url: data.data.url,
+    };
+  } else {
+    return {
+      status: data.status,
+      message: handleError(data.message),
+    };
+  }
+}
+async function paymentVerify(trackId, status) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+  const data = await PostFetch(
+    "/payment/verify",
+    {
+      token: trackId,
+      status,
+    },
+    { Authorization: `Bearer ${token?.value}` },
+  );
+  if (data.status === "success") {
+    return {
+      status: data.status,
+      payment: data.data,
+    };
+  } else {
+    return {
+      status: data.status,
+      message: handleError(data.message),
+    };
+  }
+}
+export { checkCoupon, getAddresses, payment,paymentVerify };

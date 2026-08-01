@@ -40,7 +40,7 @@ export default function Address({ setAddressId }) {
           انتخاب آدرس
         </option>
         {addresses.map((address) => (
-          <option key={address.id}>{address.title}</option>
+          <option value={address.id} key={address.id}>{address.title}</option>
         ))}
       </select>
     </div>
