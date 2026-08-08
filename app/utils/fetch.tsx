@@ -1,4 +1,4 @@
-const GetFetch = async (url, headers = {}) => {
+const GetFetch = async (url:string, headers:HeadersInit = {}) => {
   const res = await fetch(`${process.env.API_URL}${url}`, {
     cache: "no-store",
     headers: {
@@ -13,7 +13,7 @@ const GetFetch = async (url, headers = {}) => {
     return data.data;
   }
 };
-const PostFetch = async (url, body, headers = {}) => {
+const PostFetch = async (url: string, body: unknown, headers: HeadersInit = {}) => {
   const res = await fetch(`${process.env.API_URL}${url}`, {
     method: "POST",
     cache: "no-store",

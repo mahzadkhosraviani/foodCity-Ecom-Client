@@ -8,6 +8,7 @@ const persistConfig = {
   key: "root",
   storage,
 };
+
 const persistedReducer = persistReducer(persistConfig, cartReducer);
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>

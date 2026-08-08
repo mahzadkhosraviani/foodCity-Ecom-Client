@@ -1,11 +1,19 @@
 "use client";
 import { me } from "@/actions/auth";
+import type { User } from "@/types";
 import { createContext, useEffect, useState } from "react";
+type AuthContextType = {
+  user: User | null;
+  loginContext: (user: User) => void;
+  logoutContext: () => void;
+};
+type Props = {
+  children: React.ReactNode;
+};
+const Authcontext = createContext<AuthContextType | null>(null);
 
-const Authcontext = createContext();
-
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+export const AuthProvider = ({ children }:Props) => {
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     const checkUserLoggedIN = async () => {
       const data = await me();
@@ -17,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     };
     checkUserLoggedIN();
   }, []);
-  const loginContext = (user) => {
+  const loginContext = (user:User) => {
     return setUser(user);
   };
   const logoutContext = () => {

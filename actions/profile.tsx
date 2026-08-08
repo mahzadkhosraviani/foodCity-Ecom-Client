@@ -3,8 +3,12 @@ import { PostFetch } from "@/app/utils/fetch";
 import { handleError } from "@/app/utils/helper";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-
-async function editInfo(state, formData) {
+type ActionState = {
+  status: string | null;
+  message: string | null;
+  user?: any;
+};
+async function editInfo(state: ActionState, formData: FormData) {
   const name = formData.get("name");
   const email = formData.get("email");
 
@@ -46,7 +50,7 @@ async function editInfo(state, formData) {
     };
   }
 }
-async function createAddress(state, formData) {
+async function createAddress(state: ActionState, formData: FormData) {
   const title = formData.get("title");
   const cellphone = formData.get("cellphone");
   const postal_code = formData.get("postal_code");
@@ -111,7 +115,7 @@ async function createAddress(state, formData) {
     };
   }
 }
-async function editAddress(state, formData) {
+async function editAddress(state: ActionState, formData: FormData) {
   const title = formData.get("title");
   const cellphone = formData.get("cellphone");
   const postal_code = formData.get("postal_code");
@@ -184,7 +188,7 @@ async function editAddress(state, formData) {
     };
   }
 }
-async function deleteAddress(state, formData) {
+async function deleteAddress(state: ActionState, formData: FormData) {
   const address_id = formData.get("address_id");
 
   if (address_id === null || address_id === "") {

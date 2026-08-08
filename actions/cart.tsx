@@ -3,8 +3,17 @@ import { GetFetch, PostFetch } from "@/app/utils/fetch";
 import { handleError } from "@/app/utils/helper";
 
 import { cookies } from "next/headers";
-
-async function checkCoupon(state, formData) {
+type ActionState = {
+  status: string | null;
+  message: string | null;
+  percent?: number;
+  code?: string;
+  url?: string;
+};
+async function checkCoupon(
+  state: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
   const code = formData.get("code");
 
   if (code === "") {
@@ -47,7 +56,10 @@ async function getAddresses() {
   });
   return data;
 }
-async function payment(state, formData) {
+async function payment(
+  state: ActionState,
+  formData: FormData,
+ ) {
   const cart = formData.get("cart");
   const coupon = formData.get("coupon");
   const address_id = formData.get("address_id");
@@ -108,4 +120,4 @@ async function paymentVerify(trackId, status) {
     };
   }
 }
-export { checkCoupon, getAddresses, payment,paymentVerify };
+export { checkCoupon, getAddresses, payment, paymentVerify };

@@ -14,10 +14,15 @@ import Coupon from "@/components/cart/Coupon";
 import { useState } from "react";
 import Address from "@/components/cart/Address";
 import Payment from "@/components/cart/Payment";
+import type { ProductType } from "@/types";
 
-export default function cartPage() {
-  const [coupon, setCoupon] = useState({ code: "", percent: 0 });
-  const [addressId, setAddressId] = useState("");
+type Coupon = {
+  code: string;
+  percent: number;
+};
+export default function CartPage() {
+  const [coupon, setCoupon] = useState<Coupon>({ code: "", percent: 0 });
+  const [addressId, setAddressId] = useState<string>("");
   const state = useSelector((state) => state.shoppingCart);
   const totalAmount = useSelector(totalAmountCart);
   const dispatch = useDispatch();
@@ -43,7 +48,7 @@ export default function cartPage() {
                           </tr>
                         </thead>
                         <tbody>
-                          {state.cart.map((item) => (
+                          {state.cart.map((item: ProductType) => (
                             <tr key={item.id}>
                               <th>
                                 <Image
