@@ -112,39 +112,6 @@ The application is designed to work across different screen sizes:
 
 ---
 
-## 🧩 Main Application Flow
-
-The application provides a complete shopping experience:
-
-```text
-Authentication
-      ↓
-Browse Food Categories
-      ↓
-View Products
-      ↓
-Product Details
-      ↓
-Add to Cart
-      ↓
-Shopping Cart
-      ↓
-Apply Coupon
-      ↓
-Select Address
-      ↓
-Checkout
-      ↓
-Payment
-      ↓
-Payment Verification
-      ↓
-Order Created
-      ↓
-View Orders & Transactions
-```
-
----
 
 ## 🛠️ Tech Stack
 
