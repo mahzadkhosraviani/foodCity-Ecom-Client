@@ -4,14 +4,19 @@ import { logout } from "@/actions/auth";
 import Authcontext from "@/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/redux/slices/cartSlice";
 
-export default function Layout({ children }) {
-  const { logoutContext } = useContext(Authcontext);
+export default function Layout({ children }: { children: ReactNode }) {
+  const auth = useContext(Authcontext);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  if (!auth) return null;
+
+  const { logoutContext } = auth;
+
   return (
     <section className="profile_section layout_padding">
       <div className="container">

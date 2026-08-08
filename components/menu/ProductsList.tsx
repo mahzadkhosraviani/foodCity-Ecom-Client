@@ -2,6 +2,7 @@ import { GetFetch } from "@/app/utils/fetch";
 import Product from "../products/product";
 
 import Paginate from "./Paginate";
+import type { Product } from "@/types";
 
 export default async function ProductsList({ params }) {
   const data = await GetFetch(`/menu?${params}`);

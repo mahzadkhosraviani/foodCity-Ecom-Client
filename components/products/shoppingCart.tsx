@@ -1,5 +1,6 @@
 "use client";
 import { addToCart, removeFromCart } from "@/redux/slices/cartSlice";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -8,7 +9,7 @@ export default function ShoppingCart({ product }) {
   const dispatch = useDispatch();
   function handleAddToCart() {
     dispatch(removeFromCart(product.id));
-    dispatch(addToCart({ product, qty:quantity }));
+    dispatch(addToCart({ product, qty: quantity }));
     toast.success("محصول به سبد خرید اضافه شد.");
   }
   const [quantity, setQuantity] = useState(1);

@@ -100,7 +100,7 @@ export default function EditForm({ data, address }) {
             <SubmitButton title="ویرایش" style="btn btn-primary mt-4" />
           </div>
         </form>
-        <DeleteForm addressId={address.id}  />
+        <DeleteForm addressId={address.id} />
       </div>
     </>
   );

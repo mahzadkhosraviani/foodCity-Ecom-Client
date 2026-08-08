@@ -1,6 +1,6 @@
 "use client";
 import { checkCoupon } from "@/actions/cart";
-import { editInfo } from "@/actions/profile";
+
 import SubmitButton from "@/components/SubmitButton";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";

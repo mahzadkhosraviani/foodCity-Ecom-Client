@@ -24,7 +24,6 @@ export default function CategoriesList({ categories }) {
               ? "filter-list-active my-2"
               : "cursor-pointer"
           }
-
         >
           {category.name}
         </li>

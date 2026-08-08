@@ -3,8 +3,16 @@ import { numberFormat, salePercent } from "@/app/utils/helper";
 import Product from "@/components/products/product";
 import ShoppingCart from "@/components/products/shoppingCart";
 import Image from "next/image";
-
-export default async function productsPage({ params }) {
+type Props = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+type ProductImage = {
+  id: number;
+  image: string;
+};
+export default async function ProductsPage({ params }: Props) {
   const Params = await params;
   const product = await GetFetch(`/products/${decodeURI(Params.slug)}`);
   const randomProduct = await GetFetch("/random-products?count=4");
@@ -52,7 +60,7 @@ export default async function productsPage({ params }) {
                         data-bs-slide-to="0"
                         className="active"
                       ></button>
-                      {product.images.map((img, index) => (
+                      {product.images.map((img: ProductImage, index) => (
                         <button
                           key={index}
                           type="button"
@@ -72,7 +80,7 @@ export default async function productsPage({ params }) {
                           alt="product-primaryimage"
                         />
                       </div>
-                      {product.images.map((img) => (
+                      {product.images.map((img: ProductImage) => (
                         <div key={img.id} className="carousel-item">
                           <Image
                             unoptimized
@@ -114,7 +122,7 @@ export default async function productsPage({ params }) {
       <section className="food_section my-5">
         <div className="container">
           <div className="row gx-3">
-            {randomProduct.map((product, index) => (
+            {randomProduct.map((product: ProductImage, index: number) => (
               <div key={index} className="col-sm-6 col-lg-3">
                 <Product product={product} />
               </div>

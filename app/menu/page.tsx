@@ -6,9 +6,11 @@ import CategoriesList from "@/components/menu/CategoriesList";
 import Sort from "@/components/menu/Sort";
 import ProductsList from "@/components/menu/ProductsList";
 import Loading from "@/components/menu/Loading";
+type Props = {
+  searchParams: Promise<Record<string, string>>;
+};
 
-
-export default async function MenuPage({ searchParams }) {
+export default async function MenuPage({ searchParams }: Props) {
   const params = await searchParams;
   const searchparams = new URLSearchParams(params);
 

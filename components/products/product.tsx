@@ -1,6 +1,7 @@
 "use client";
 import { numberFormat } from "@/app/utils/helper";
 import { addToCart, removeFromCart } from "@/redux/slices/cartSlice";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";

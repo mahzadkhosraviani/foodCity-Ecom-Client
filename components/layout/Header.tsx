@@ -7,9 +7,14 @@ import { useContext } from "react";
 import Authcontext from "@/context/AuthContext";
 import { useSelector } from "react-redux";
 export default function Header() {
-  const { user } = useContext(Authcontext);
+
   const pathname = usePathname();
   const state = useSelector((state) => state.shoppingCart);
+  const auth = useContext(Authcontext);
+
+if (!auth) return null;
+
+const { user } = auth;
   return (
     <>
       <div className={pathname === "/" ? "" : "sub_page"}>
