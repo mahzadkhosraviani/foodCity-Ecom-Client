@@ -20,7 +20,7 @@ export default function FormContact() {
           <input
             name="name"
             type="text"
-            className="form-control"
+            className="form-control mt-4"
             placeholder="نام و نام خانوادگی"
           />
         </div>
@@ -28,7 +28,7 @@ export default function FormContact() {
           <input
             name="email"
             type="email"
-            className="form-control"
+            className="form-control mt-4"
             placeholder="ایمیل"
           />
         </div>
@@ -36,21 +36,22 @@ export default function FormContact() {
           <input
             name="subject"
             type="text"
-            className="form-control"
+            className="form-control mt-4"
             placeholder="موضوع پیام"
           />
         </div>
         <div>
           <textarea
             name="text"
-            rows="10"
+            rows={10}
             style={{ height: "100px" }}
-            className="form-control"
+            className="form-control mt-4"
             placeholder="متن پیام"
           ></textarea>
         </div>
+
         <div className="btn_box">
-          <SubmitButton title="ارسال پیام" />
+          <SubmitButton title="ارسال پیام" style="mt-3 mb-4" />
         </div>
       </form>
     </div>

@@ -2,11 +2,25 @@
 
 import { PostFetch } from "@/app/utils/fetch";
 import { handleError } from "@/app/utils/helper";
-import { error } from "console";
+
 import { cookies } from "next/headers";
 
-async function login(stateLogin, formData) {
+type ActionState = {
+  status: string | null;
+  message: string | null;
+  user?: any;
+};
+async function login(
+  stateLogin: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
   const cellphone = formData.get("cellphone");
+  if (typeof cellphone !== "string") {
+    return {
+      status: "error",
+      message: "شماره موبایل الزامی است.",
+    };
+  }
 
   if (cellphone === "") {
     return {
@@ -43,7 +57,10 @@ async function login(stateLogin, formData) {
     };
   }
 }
-async function CheckOtp(stateOtp, formData) {
+async function CheckOtp(
+  stateOtp: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
   const otp = formData.get("otp");
 
   if (otp === "") {
@@ -93,7 +110,7 @@ async function CheckOtp(stateOtp, formData) {
     };
   }
 }
-async function me(stateOtp, formData) {
+async function me() {
   const cookieStore = await cookies();
   const token = cookieStore.get("access_token");
 
@@ -119,7 +136,7 @@ async function me(stateOtp, formData) {
     };
   }
 }
-async function resendOtp(stateResendOtp, formData) {
+async function resendOtp() {
   const cookieStore = await cookies();
   const loginToken = cookieStore.get("login_token");
   if (!loginToken) {
@@ -151,4 +168,25 @@ async function resendOtp(stateResendOtp, formData) {
     };
   }
 }
-export { login, CheckOtp, me, resendOtp };
+async function logout() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+
+  const data = await PostFetch(
+    "/auth/logout",
+    {},
+    { Authorization: `Bearer ${token?.value}` },
+  );
+
+  if (data.status === "success") {
+    cookieStore.delete("access_token");
+    return {
+      success: "you are logged out",
+    };
+  } else {
+    return {
+      error: "user forbbiden",
+    };
+  }
+}
+export { login, CheckOtp, me, resendOtp, logout };

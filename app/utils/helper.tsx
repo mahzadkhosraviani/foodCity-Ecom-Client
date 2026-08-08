@@ -1,8 +1,8 @@
-const numberFormat = (number) => {
+const numberFormat = (number:number) => {
   return new Intl.NumberFormat().format(number);
 };
 
-const handleError = (message) => {
+const handleError = (message: string | Record<string, string[]>) => {
   if (typeof message === "object" && message !== null) {
     const errors = [];
 
@@ -17,7 +17,7 @@ const handleError = (message) => {
 
   return message;
 };
-const salePercent=(price,salePrice)=>{
+const salePercent=(price:number,salePrice:number)=>{
   return Math.round(((price-salePrice)/price)*100);
 
 }

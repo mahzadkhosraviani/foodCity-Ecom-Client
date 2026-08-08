@@ -2,7 +2,7 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Link from "next/link";
 import Product from "./product";
-
+import type { ProductType } from "@/types";
 
 export default function ProductsTabs({ tabList, tabPanel }) {
   return (
@@ -14,16 +14,16 @@ export default function ProductsTabs({ tabList, tabPanel }) {
         <Tabs selectedTabClassName="active">
           <TabList>
             <ul className="filters_menu">
-              {tabList.map((list, index) => (
+              {tabList.map((list, index: number) => (
                 <Tab key={index}>{list}</Tab>
               ))}
             </ul>
           </TabList>
           <div className="filters-content">
-            {tabPanel.map((panel, index) => (
-              <TabPanel  key={index}>
+            {tabPanel.map((panel, index: number) => (
+              <TabPanel key={index}>
                 <div className="row grid">
-                  {panel.map((product) => (
+                  {panel.map((product: ProductType) => (
                     <div key={product.id} className="col-sm-6 col-lg-4">
                       <Product product={product} />
                     </div>

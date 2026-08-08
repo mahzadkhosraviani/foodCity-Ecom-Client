@@ -1,5 +1,5 @@
-const GetFetch = async (url, headers = {}) => {
-  const res = await fetch(`http://localhost:8000/api${url}`, {
+const GetFetch = async (url:string, headers:HeadersInit = {}) => {
+  const res = await fetch(`${process.env.API_URL}${url}`, {
     cache: "no-store",
     headers: {
       "Content-Type": "application/json",
@@ -13,8 +13,8 @@ const GetFetch = async (url, headers = {}) => {
     return data.data;
   }
 };
-const PostFetch = async (url, body, headers = {}) => {
-  const res = await fetch(`http://localhost:8000/api${url}`, {
+const PostFetch = async (url: string, body: unknown, headers: HeadersInit = {}) => {
+  const res = await fetch(`${process.env.API_URL}${url}`, {
     method: "POST",
     cache: "no-store",
     headers: {
