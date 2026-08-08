@@ -2,7 +2,6 @@
 
 A modern responsive e-commerce frontend application built with Next.js, TypeScript.
 
-🚧 This project is currently under active development.
 
 ## Features
 
@@ -12,7 +11,9 @@ A modern responsive e-commerce frontend application built with Next.js, TypeScri
 - Responsive layout
 - Contact page
 - Profile page
-- Admin panel
+  About page
+  Dynamic E-commerace
+  Ability to order food with all the function and accesses 
 - Dynamic product routes
 
 ## Tech Stack
@@ -52,7 +53,7 @@ This project is still in progress and new features are continuously being added.
 - Wishlist
 - Search
 - Filters
-- Admin dashboard
+
 
 ## Author
 
