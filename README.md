@@ -13,7 +13,7 @@ A modern responsive e-commerce frontend application built with Next.js, TypeScri
 - Profile page
   About page
   Dynamic E-commerace
-  Ability to order food with all the function and accesses 
+  Ability to order food with all accesses 
 - Dynamic product routes
 
 ## Tech Stack
